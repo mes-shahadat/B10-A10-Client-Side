@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from "daisyui"
+import { retro } from "daisyui/src/theming/themes"
 
 export default {
   content: [
@@ -11,7 +12,22 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes: ["retro", "wireframe", "garden", "valentine", "aqua", "dracula", "black"],
+    themes: [
+      {
+        retro: {
+          ...retro,
+          ".menu li > *:not(ul):not(.menu-title):not(details).active": {
+            color: "oklch(var(--er))", 
+            backgroundColor: "transparent",
+          },
+        },
+      },
+      
+      "cmyk",
+      "luxury",
+      "dim",
+      "dracula",
+    ],
     darkTheme: "dracula",
     base: true,
     styled: true,
