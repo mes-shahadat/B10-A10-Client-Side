@@ -36,7 +36,7 @@ const Login = () => {
 
           <div className="relative">
 
-            <input type="password" placeholder="Password" className="input input-bordered w-full" ref={passwordRef} name="password" required />
+            <input type="password" placeholder="Password" className="input input-bordered w-full" name="password" ref={passwordRef} required />
 
             <div className="absolute top-3 right-3 text-2xl" onClick={handleClick}>
               {
@@ -51,12 +51,12 @@ const Login = () => {
           <div className="flex w-full">
             <button className="card bg-base-100 rounded-box grid flex-grow place-items-center border" type="button" onClick={loginGoogleUser}>Google</button>
             <div className="divider divider-horizontal">OR</div>
-            <button className="card bg-base-100 rounded-box grid flex-grow place-items-center border" type="submit">Login</button>
+            <button className="card rounded-box grid flex-grow place-items-center border border-accent bg-accent" type="submit">Login</button>
           </div>
 
         </form>
 
-        <p className="font-semibold text-center pb-8">Don't have an account ? <Link className="text-blue-600" to="/register" >Sign Up</Link></p>
+        <p className="font-semibold text-center pb-8">Don't have an account ? <Link className="text-info" to="/register" >Sign Up</Link></p>
       </div>
     </>
   )
