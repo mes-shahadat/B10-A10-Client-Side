@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import AddReview from "../pages/AddReview";
 import Error from "../components/Error";
+import ForgotPassword from "../pages/ForgotPassword";
 
 export const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPassword/>
             },
             {
                 path: "register",

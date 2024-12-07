@@ -3,10 +3,12 @@ import logo from "../assets/logo.png"
 import userImg from "../assets/user.png"
 import { useContext, useEffect } from "react";
 import { LocalStorageContext } from "../utils/LocalStorageProvider";
+import { AuthContext } from "../utils/AuthProvider";
 
 export const Nav = () => {
 
-  const user = true;
+  const { user, logOut } = useContext(AuthContext);
+  
   const { radioChecked, setRadioChecked } = useContext(LocalStorageContext);
 
 
@@ -98,7 +100,7 @@ export const Nav = () => {
 
               {/* sun icon */}
               <svg
-                className="swap-off h-10 w-10 fill-current"
+                className="swap-off h-8 w-8 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24">
                 <path
@@ -107,7 +109,7 @@ export const Nav = () => {
 
               {/* moon icon */}
               <svg
-                className="swap-on h-10 w-10 fill-current"
+                className="swap-on h-8 w-8 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24">
                 <path
@@ -119,12 +121,12 @@ export const Nav = () => {
               user ? <div className="inline-flex space-x-2">
                 <img
                   className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden"
-                  src={userImg} alt=""
+                  src={user.photoURL ||userImg} alt=""
                   data-tooltip-id="my-tooltip"
-                  data-tooltip-content="You"
+                  data-tooltip-content={user.displayName || "you"}
                   data-tooltip-place="top"
                 />
-                <NavLink className="btn ">Log Out</NavLink>
+                <NavLink className="btn " onClick={logOut}>Log Out</NavLink>
               </div> : <div className="inline-flex space-x-2">
                 <NavLink className="btn" to="/login">Login</NavLink>
                 <NavLink className="btn max-sm:hidden" to="/register">Register</NavLink>

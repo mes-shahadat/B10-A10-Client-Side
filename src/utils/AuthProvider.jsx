@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "./firebase_init";
+import auth from './firebase.config'
 import { toast } from 'react-toastify';
 
 const AuthContext = createContext()
