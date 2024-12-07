@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import AddReview from "../pages/AddReview";
 import Error from "../components/Error";
 import ForgotPassword from "../pages/ForgotPassword";
+import PrivateRoute from "../components/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -27,15 +28,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "add-review",
-                element: <AddReview />
+                element: <PrivateRoute> <AddReview /> </PrivateRoute>
             },
             {
                 path: "my-reviews",
-                element: <MyReviews />
+                element: <PrivateRoute> <MyReviews /> </PrivateRoute>
             },
             {
                 path: "my-watchlist",
-                element: <MyWatchlist />
+                element: <PrivateRoute> <MyWatchlist /> </PrivateRoute>
             },
             {
                 path: "login",

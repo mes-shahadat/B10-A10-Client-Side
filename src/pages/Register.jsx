@@ -66,7 +66,7 @@ const Register = () => {
 
   return (
     <>
-      {user ? <Navigate to={state?.pathname || "/"} replace={true} /> : null}
+      {user ? <Navigate to={state || "/"} replace={true} /> : null}
 
       <div className="max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
 
