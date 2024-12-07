@@ -80,7 +80,7 @@ export const Nav = () => {
             </label>
 
             {
-              user ? <div className=" space-x-2">
+              user ? <div className="inline-flex space-x-2">
                 <img
                   className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden"
                   src={userImg} alt=""
@@ -89,7 +89,7 @@ export const Nav = () => {
                   data-tooltip-place="top"
                 />
                 <NavLink className="btn ">Log Out</NavLink>
-              </div> : <div className=" space-x-2">
+              </div> : <div className="inline-flex space-x-2">
                 <NavLink className="btn" to="/login">Login</NavLink>
                 <NavLink className="btn max-sm:hidden" to="/register">Register</NavLink>
               </div>

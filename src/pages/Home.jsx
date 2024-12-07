@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react"
 import Banner from "../components/Banner"
 import { useLoaderData } from "react-router-dom";
+import NewReleases from "../components/NewReleases";
+import Recommended from "../components/Recommended";
+import HighestRated from "../components/HighestRated";
 
 const Home = () => {
 
@@ -97,6 +100,11 @@ const Home = () => {
         </div>
       )}
 
+      <div className="w-11/12 mx-auto my-20">
+      <NewReleases />
+      <Recommended />
+      <HighestRated />
+      </div>
     </>
   )
 }
