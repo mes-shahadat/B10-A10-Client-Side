@@ -6,6 +6,7 @@ import { useLoaderData } from "react-router-dom";
 const Home = () => {
 
   const data = useLoaderData();
+  const [radio, setRadio] = useState(false);
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
@@ -21,30 +22,45 @@ const Home = () => {
   })
 
   useEffect(() => {
+    document.querySelector('.navbar .theme-controller').addEventListener("click", () => setRadio(prev => !prev))
+  }, [])
 
-    const navbar = document.querySelector('.navbar');
+  useEffect(() => {
 
-    navbar.classList.add('bg-transparent');
-    navbar.classList.add('text-white');
+    const navbar = document.querySelector('.nav-container');
+    const dropdown = document.querySelector('.navbar .menu');
+    const radio = document.querySelector('.navbar .theme-controller');
+
+    const textColor = radio.checked ? 'text-white' : 'text-black';
+
+    if (window.scrollY <= 50) {
+
+      navbar.classList.add('bg-transparent');
+      navbar.classList.add('text-white');
+      dropdown.classList.add(textColor);
+    }
 
     function navBackground() {
       if (window.scrollY > 50) {
         navbar.classList.remove('text-white');
         navbar.classList.remove('bg-transparent');
+        dropdown.classList.remove(textColor);
       } else if (window.scrollY <= 50) {
         navbar.classList.add('bg-transparent');
         navbar.classList.add('text-white');
+        dropdown.classList.add(textColor);
       }
     }
 
     window.addEventListener('scroll', navBackground);
 
     return () => {
-      navbar.classList.remove('text-white');
       navbar.classList.remove('bg-transparent');
+      navbar.classList.remove('text-white');
+      dropdown.classList.remove(textColor);
       window.removeEventListener("scroll", navBackground)
     }
-  }, [])
+  }, [radio])
 
   return (
     <>
@@ -80,6 +96,7 @@ const Home = () => {
           })}
         </div>
       )}
+
     </>
   )
 }
