@@ -23,9 +23,6 @@ export default {
         },
       },
       
-      "cmyk",
-      "luxury",
-      "dim",
       "dracula",
     ],
     darkTheme: "dracula",

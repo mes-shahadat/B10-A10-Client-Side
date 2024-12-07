@@ -1,10 +1,46 @@
 import { NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import userImg from "../assets/user.png"
+import { useContext, useEffect } from "react";
+import { LocalStorageContext } from "../utils/LocalStorageProvider";
 
 export const Nav = () => {
 
   const user = true;
+  const { radioChecked, setRadioChecked } = useContext(LocalStorageContext);
+
+
+  useEffect(() => {
+    const toggle = document.querySelector('.navbar .theme-controller');
+
+    const update = () => {
+      setRadioChecked(prev => !prev)
+    }
+
+    toggle.addEventListener("click", update)
+
+    return () => toggle.removeEventListener("click", update)
+  }, [])
+
+  useEffect(() => {
+
+    let theme = radioChecked ? "retro" : "dracula";
+
+    if (localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme)
+    } else {
+      localStorage.setItem("theme", theme)
+    }
+
+    const radio = document.querySelector('.navbar .theme-controller');
+
+    if (radioChecked) {
+      radio.checked = true
+    } else {
+      radio.checked = false
+    }
+
+  }, [radioChecked])
 
   const navlinks = <>
     <li><NavLink to="/">Home</NavLink></li>
@@ -58,7 +94,7 @@ export const Nav = () => {
           <div className="navbar-end space-x-2">
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
-              <input type="checkbox" className="theme-controller" value="dracula" />
+              <input type="checkbox" className="theme-controller" value="retro" />
 
               {/* sun icon */}
               <svg

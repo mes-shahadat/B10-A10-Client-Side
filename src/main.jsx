@@ -6,12 +6,15 @@ import { AuthProvider } from './utils/AuthProvider'
 
 import "keen-slider/keen-slider.min.css"
 import './index.css'
+import { LocalStorageProvider } from './utils/LocalStorageProvider'
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <LocalStorageProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </LocalStorageProvider>
   </StrictMode>,
 )
