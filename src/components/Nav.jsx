@@ -16,7 +16,7 @@ export const Nav = () => {
 
   return (
     <>
-      <div className="navbar bg-base-100 fixed transition-all duration-500 z-10">
+      <div className="navbar bg-base-100 fixed transition-all duration-500 z-10 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -77,7 +77,8 @@ export const Nav = () => {
           {
             user ? <div className=" space-x-2">
               <img
-                className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden" src={userImg} alt=""
+                className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden" 
+                src={userImg} alt=""
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="You"
                 data-tooltip-place="top"

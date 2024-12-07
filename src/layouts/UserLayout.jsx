@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 import Nav from "../components/nav"
 
 const UserLayout = () => {
+
   return (
     <>
       <Nav />

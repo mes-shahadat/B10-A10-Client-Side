@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "firebase": "^11.0.2",
+    "keen-slider": "^6.8.6",
     "react": "^18.3.1",
+    "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.2",
     "react-tooltip": "^5.28.0"

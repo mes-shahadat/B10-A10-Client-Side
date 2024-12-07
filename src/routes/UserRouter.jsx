@@ -11,35 +11,36 @@ import AddReview from "../pages/AddReview";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <UserLayout/>,
+        element: <UserLayout />,
         children: [
             {
                 path: "",
-                element: <Home/>
+                element: <Home />,
+                loader: () => fetch("http://localhost:3000/banners"),
             },
             {
                 path: "all-reviews",
-                element: <AllReviews/>
+                element: <AllReviews />
             },
             {
                 path: "add-review",
-                element: <AddReview/>
+                element: <AddReview />
             },
             {
                 path: "my-reviews",
-                element: <MyReviews/>
+                element: <MyReviews />
             },
             {
                 path: "my-watchlist",
-                element: <MyWatchlist/>
+                element: <MyWatchlist />
             },
             {
                 path: "login",
-                element: <Login/>
+                element: <Login />
             },
             {
                 path: "register",
-                element: <Register/>
+                element: <Register />
             },
         ]
     },
