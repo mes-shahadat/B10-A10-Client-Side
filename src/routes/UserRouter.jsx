@@ -10,6 +10,7 @@ import AddReview from "../pages/AddReview";
 import Error from "../components/Error";
 import ForgotPassword from "../pages/ForgotPassword";
 import PrivateRoute from "../components/PrivateRoute";
+import UpdateProfile from "../pages/UpdateProfile";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Register />
+            },
+            {
+                path: "update-profile",
+                element: <PrivateRoute> <UpdateProfile/> </PrivateRoute>
             },
         ]
     },

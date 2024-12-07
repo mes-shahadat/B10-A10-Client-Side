@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import userImg from "../assets/user.png"
 import { useContext, useEffect } from "react";
@@ -119,13 +119,14 @@ export const Nav = () => {
 
             {
               user ? <div className="inline-flex space-x-2">
+                <Link to="/update-profile">
                 <img
                   className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden"
                   src={user.photoURL ||userImg} alt=""
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content={user.displayName || "you"}
                   data-tooltip-place="top"
-                />
+                /></Link>
                 <NavLink className="btn " onClick={logOut}>Log Out</NavLink>
               </div> : <div className="inline-flex space-x-2">
                 <NavLink className="btn" to="/login">Login</NavLink>

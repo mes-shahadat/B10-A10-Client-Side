@@ -17,10 +17,10 @@ const ForgotPassword = () => {
     return (
         <>
 
-            <div className="max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
+            <div className="max-sm:w-[95%] max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
 
                 <p className="text-xl font-bold text-center pt-8 pb-4">Forgot Password</p>
-                
+
                 <p className=" text-center max-w-[35ch] mx-auto">Enter your email address below and we'll send reset link to this email.</p>
 
                 <form className="p-10 space-y-4 " onSubmit={e => handleSubmit(e)}>

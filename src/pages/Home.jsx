@@ -32,7 +32,7 @@ const Home = () => {
     const dropdown = document.querySelector('.navbar .menu');
     const radio = document.querySelector('.navbar .theme-controller');
 
-    const textColor = radio.checked ? 'text-white' : 'text-black';
+    const textColor = radio.checked ? 'text-black' : 'text-white';
 
     if (window.scrollY <= 50) {
 
