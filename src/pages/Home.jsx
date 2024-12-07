@@ -102,8 +102,8 @@ const Home = () => {
 
       <div className="w-11/12 mx-auto my-20">
       <NewReleases />
-      <Recommended />
       <HighestRated />
+      <Recommended />
       </div>
     </>
   )

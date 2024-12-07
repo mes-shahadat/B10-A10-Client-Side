@@ -14,7 +14,7 @@ const NewReleases = () => {
 
     return (
         <>
-            <h2 className="text-center text-4xl font-bold my-8">NEW RELEASES</h2>
+            <h2 className="text-center text-4xl font-bold my-8">NEW RELEASED GAMES</h2>
             <div className="flex flex-wrap gap-4 items-center justify-center">
                 {
                     user?.map(
