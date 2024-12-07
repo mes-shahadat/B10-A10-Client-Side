@@ -1,7 +1,7 @@
 import ReactStars from "react-rating-stars-component";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
-import Loading from "./Loading";
+import Loader from "./Loader";
 
 const HighestRated = () => {
 
@@ -59,7 +59,7 @@ const HighestRated = () => {
                             </div>
                         )
                     }
-                </div> : <Loading />
+                </div> : <Loader />
             }
         </>
     )
