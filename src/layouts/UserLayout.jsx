@@ -11,7 +11,7 @@ const UserLayout = () => {
       <Outlet />
       <Footer />
       <Tooltip id="my-tooltip" style={{ backgroundColor: "oklch(var(--b3))", color: "oklch(var(--bc))" }} />
-      <div className="h-[100vh]"></div>
+      {/* <div className="h-[100vh]"></div> */}
     </>
   )
 }

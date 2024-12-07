@@ -32,7 +32,7 @@ const Recommended = () => {
                                         {item.genre}
                                     </span>
 
-                                    <Link className="bg-primary px-2 py-1 rounded-full font-semibold" to={`/review/${item._id}`}>
+                                    <Link className="bg-primary px-2  rounded-lg font-semibold" to={`/review/${item._id}`}>
                                         Details
                                     </Link>
                                 </div>
