@@ -8,7 +8,7 @@ import { AuthContext } from "../utils/AuthProvider";
 export const Nav = () => {
 
   const { user, logOut } = useContext(AuthContext);
-  
+
   const { radioChecked, setRadioChecked } = useContext(LocalStorageContext);
 
 
@@ -54,7 +54,7 @@ export const Nav = () => {
 
   return (
     <>
-      <div className="nav-container bg-base-100 w-full h-[68px] fixed z-40 transition-all duration-500 shadow-sm">
+      <div className="nav-container bg-base-100 w-full h-[68px] fixed z-40 transition-all duration-500 shadow-sm max-w-[2000px]">
 
         <div className="navbar md:w-11/12 mx-auto">
 
@@ -82,7 +82,9 @@ export const Nav = () => {
                 }
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl"><img className="h-20 -mt-4" src={logo} alt="" /></a>
+            <Link className="btn btn-ghost text-xl" to="/">
+              <img className="h-20 -mt-4" src={logo} alt="" />
+            </Link>
           </div>
 
           <div className="navbar-center hidden lg:flex">
@@ -120,13 +122,13 @@ export const Nav = () => {
             {
               user ? <div className="inline-flex space-x-2">
                 <Link to="/update-profile">
-                <img
-                  className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden"
-                  src={user.photoURL ||userImg} alt=""
-                  data-tooltip-id="my-tooltip"
-                  data-tooltip-content={user.displayName || "you"}
-                  data-tooltip-place="top"
-                /></Link>
+                  <img
+                    className="h-12 w-12 rounded-full object-cover inline-block max-sm:hidden"
+                    src={user.photoURL || userImg} alt=""
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={user.displayName || "you"}
+                    data-tooltip-place="top"
+                  /></Link>
                 <NavLink className="btn " onClick={logOut}>Log Out</NavLink>
               </div> : <div className="inline-flex space-x-2">
                 <NavLink className="btn" to="/login">Login</NavLink>
