@@ -11,6 +11,7 @@ import Error from "../components/Error";
 import ForgotPassword from "../pages/ForgotPassword";
 import PrivateRoute from "../components/PrivateRoute";
 import UpdateProfile from "../pages/UpdateProfile";
+import ReviewDetails from "../pages/ReviewDetails";
 
 export const router = createBrowserRouter([
     {
@@ -21,11 +22,15 @@ export const router = createBrowserRouter([
             {
                 path: "",
                 element: <Home />,
-                loader: () => fetch("http://localhost:3000/banners"),
+                loader: () => fetch("https://b10-a10-server-side-nine.vercel.app/banners"),
             },
             {
                 path: "all-reviews",
                 element: <AllReviews />
+            },
+            {
+                path: "/review/:id",
+                element: <ReviewDetails/>
             },
             {
                 path: "add-review",

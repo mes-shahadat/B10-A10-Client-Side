@@ -54,7 +54,7 @@ export const Nav = () => {
 
   return (
     <>
-      <div className="nav-container bg-base-100 w-full h-[68px] fixed z-20 transition-all duration-500 shadow-sm">
+      <div className="nav-container bg-base-100 w-full h-[68px] fixed z-40 transition-all duration-500 shadow-sm">
 
         <div className="navbar md:w-11/12 mx-auto">
 

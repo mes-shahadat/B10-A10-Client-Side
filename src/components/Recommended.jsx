@@ -8,7 +8,7 @@ const Recommended = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/recommended?limit=8")
+        fetch("https://b10-a10-server-side-nine.vercel.app/recommended?limit=8")
             .then(res => res.json())
             .then(data => setPost(data))
             .catch(() => setError("fetch failed"))
@@ -45,7 +45,7 @@ const Recommended = () => {
                             </div>
                         )
                     }
-                </div> : error ? <p className="text-center text-red-500">fetch failed</p> : <Loader />
+                </div> : error ? <p className="text-center text-red-500">{error}</p> : <Loader />
             }
         </>
     )

@@ -36,7 +36,7 @@ const Login = () => {
 
               {state ? <p
                 className="text-center text-red-500 my-8 uppercase">
-                you need to login for accessing this page
+                you need to login for accessing {state.slice(1,)} page
               </p> : null}
 
               <div className="max-sm:w-[95%] max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">

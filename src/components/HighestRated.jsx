@@ -9,7 +9,7 @@ const HighestRated = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/highest-rated?limit=8")
+        fetch("https://b10-a10-server-side-nine.vercel.app/highest-rated?limit=8")
             .then(res => res.json())
             .then(data => setPost(data))
             .catch(() => setError("fetch failed"))
@@ -49,7 +49,7 @@ const HighestRated = () => {
                                         activeColor="oklch(var(--wa))"
                                     />
 
-                                    <div className=" ">
+                                    <div className="my-2 ">
                                         <Link
                                             className="btn btn-primary"
                                             to={`/review/${item._id}`}
@@ -60,7 +60,7 @@ const HighestRated = () => {
                             </div>
                         )
                     }
-                </div> : error ? <p className="text-center text-red-500">fetch failed</p> : <Loader />
+                </div> : error ? <p className="text-center text-red-500">{error}</p> : <Loader />
             }
         </>
     )
