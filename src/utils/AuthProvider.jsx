@@ -10,13 +10,20 @@ const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [btnLoading, setBtnLoading] = useState(false)
+    const [postLoading, setPostLoading] = useState(false)
+
+    const useBtnLoader = (bool) => {
+
+        const [btnLoading, setBtnLoading] = useState(bool || false)
+
+        return {btnLoading, setBtnLoading}
+    }
 
     const loginGoogleUser = () => {
 
         const provider = new GoogleAuthProvider();
 
-        signInWithPopup(auth, provider)
+        return signInWithPopup(auth, provider)
             .then(() => {
                 toast.success("Log In successfull", {
                     position: "bottom-right"
@@ -26,12 +33,12 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            .finally(()=> setBtnLoading(false));
+            
     }
 
     const createUser = (email, password, callback) => {
 
-        createUserWithEmailAndPassword(auth, email, password)
+        return createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 callback()
                 toast.success("Registration successfull", {
@@ -43,12 +50,12 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            .finally(()=> setBtnLoading(false));
+            
     }
 
     const updateUser = (obj) => {
 
-        updateProfile(auth.currentUser, obj)
+        return updateProfile(auth.currentUser, obj)
             .then(() => {
                 toast.success("Profile update successfull", {
                     position: "bottom-right"
@@ -59,12 +66,12 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            .finally(()=> setBtnLoading(false));
+            
     }
 
     const loginUser = (email, password) => {
 
-        signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password)
             .then(() => {
 
                 toast.success("Login successfull", {
@@ -77,7 +84,7 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            .finally(()=> setBtnLoading(false))
+            
 
     }
 
@@ -132,8 +139,9 @@ const AuthProvider = ({ children }) => {
 
         user,
         loading,
-        btnLoading,
-        setBtnLoading,
+        postLoading,
+        setPostLoading,
+        useBtnLoader,
         setUser,
         createUser,
         loginUser,

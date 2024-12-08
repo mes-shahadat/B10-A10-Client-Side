@@ -1,7 +1,15 @@
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const MyReviews = () => {
   return (
-    <div>MyReviews</div>
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Chill Gamer - my reviews</title>
+        </Helmet>
+      </HelmetProvider>
+      <div>MyReviews</div>
+    </>
   )
 }
 

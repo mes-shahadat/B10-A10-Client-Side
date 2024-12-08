@@ -18,7 +18,7 @@ const HighestRated = () => {
 
     return (
         <>
-            <h2 className="text-center text-4xl font-bold mt-40 mb-16">HIGHEST RATED GAMES</h2>
+            <h2 className="text-center text-4xl font-bold mt-28 mb-16">HIGHEST RATED GAMES</h2>
             {
                 post ? <div className="flex flex-wrap gap-4 items-center justify-center">
                     {
@@ -26,7 +26,9 @@ const HighestRated = () => {
                             item => <div key={item._id} className="card card-compact bg-base-100 w-80 shadow-xl">
                                 <figure>
                                     <img
-                                        src={item.game_cover} />
+                                        src={item.game_cover} 
+                                        loading="lazy"
+                                        />
                                 </figure>
                                 <div className="card-body items-center text-center">
                                     <h2 className="card-title">{item.title.length > 27 ? item.title.slice(0, 24) + "..." : item.title}</h2>
@@ -49,9 +51,9 @@ const HighestRated = () => {
                                         activeColor="oklch(var(--wa))"
                                     />
 
-                                    <div className="my-2 ">
+                                    <div className="my-2">
                                         <Link
-                                            className="btn btn-primary"
+                                            className="btn btn-primary focus:text-info"
                                             to={`/review/${item._id}`}
                                         >Details</Link>
                                     </div>

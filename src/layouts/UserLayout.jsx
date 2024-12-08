@@ -9,7 +9,9 @@ const UserLayout = () => {
   return (
     <>
       <Nav />
-      <Outlet />
+      <div className="flex-1">
+        <Outlet />
+      </div>
       <Footer />
       <Tooltip id="my-tooltip" style={{ backgroundColor: "oklch(var(--b3))", color: "oklch(var(--bc))" }} />
       <ToastContainer />

@@ -1,72 +1,64 @@
 import ReactStars from "react-rating-stars-component";
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData, useNavigation, useSearchParams } from 'react-router-dom'
 import { useEffect } from "react";
 import { useState } from "react"
 import Loader from "../components/Loader";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const AllReviews = () => {
 
-  const [post, setPost] = useState(null);
-  const [postCount, setPostCount] = useState(null);
-  const [genre, setGenre] = useState(null);
+  const [post, postCount] = useLoaderData()
+  const [genres, setGenres] = useState(null);
   const [paginationNumber, setPaginationNumber] = useState([]);
-  const [fetchObj, setFetchObj] = useState({
-    sort: "title",
-    order: "asc",
-    genre: "",
-    limit: 10,
-    skip: 0
-  })
   const [error, setError] = useState(null);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigation = useNavigation()
+  console.log(navigation)
+
+  const { sort, order, genre, limit, page } = {
+    sort: searchParams.get("sort"),
+    order: searchParams.get("order"),
+    genre: searchParams.get("genre"),
+    limit: parseInt(searchParams.get("limit")),
+    page: parseInt(searchParams.get("page"))
+  }
 
   const handleChange = e => {
 
-    if (e.target.name === "genre") {
-      setFetchObj(prev => {
-        return { ...prev, genre: e.target.value }
-      })
-    }
-    else if (e.target.name === "sort") {
-      setFetchObj(prev => {
-        return { ...prev, sort: e.target.value }
-      })
-    }
-    else if (e.target.name === "order") {
-      setFetchObj(prev => {
-        return { ...prev, order: e.target.value }
-      })
-    }
+    const obj = { sort, order, genre, limit, page: 1, [e.target.name]: e.target.value };
+    setSearchParams(obj)
 
   }
 
+
   useEffect(() => {
+
     fetch(`https://b10-a10-server-side-nine.vercel.app/genres`)
       .then(res => res.json())
-      .then(data => setGenre(data))
-      .catch(() => setGenre(["fetch failed"]))
+      .then(data => setGenres(data))
+      .catch(() => setGenres(["fetch failed"]))
+
   }, [])
 
   useEffect(() => {
 
-    fetch(`https://b10-a10-server-side-nine.vercel.app/reviews?sort=${fetchObj.sort}&order=${fetchObj.order}&genre=${fetchObj.genre}&limit=${fetchObj.limit}&skip=${fetchObj.skip}`)
-      .then(res => res.json())
-      .then(data => setPost(data))
-      .catch(() => setError("fetch failed"))
+    if (!post) {
+      setError("fetch failed")
+    }
 
-    fetch(`https://b10-a10-server-side-nine.vercel.app/reviews-count?sort=${fetchObj.sort}&order=${fetchObj.order}&genre=${fetchObj.genre}&limit=${fetchObj.limit}&skip=${fetchObj.skip}`)
-      .then(res => res.json())
-      .then(data => setPostCount(data))
-      .catch(() => setError("fetching pagination failed"))
+    if (!postCount) {
+      setError("fetching pagination failed")
+    }
 
-  }, [fetchObj])
+  }, [post, postCount])
 
   useEffect(() => {
 
     let arr = [];
 
     if (postCount) {
-      for (let i = 0; i < Math.ceil(postCount.count / 10); i++) {
+      for (let i = 0; i < Math.ceil(postCount.count / limit); i++) {
         arr.push(i + 1)
       }
     }
@@ -77,6 +69,12 @@ const AllReviews = () => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Chill Gamer - all reviews: {genre}</title>
+        </Helmet>
+      </HelmetProvider>
+
       <div className="my-20">
 
         <div className="w-11/12 mx-auto my-8 flex max-md:flex-col gap-4 items-center justify-around">
@@ -89,26 +87,30 @@ const AllReviews = () => {
             <div className="inline-flex gap-2">
               <select className="select select-bordered w-full max-w-xs" name="genre" onChange={handleChange}>
 
-                <option value="" disabled selected>Genre</option>
+                <option value="" >Genre</option>
                 {
-                  genre?.map(
-                    (item, index) => <option key={index} value={item}>{item}</option>
+                  genres?.map(
+                    (item, index) => <option
+                      key={index}
+                      value={item}
+                      selected={item === genre}
+                    >{item}</option>
                   )
                 }
 
               </select>
 
               <select className="select select-bordered w-full max-w-xs" name="sort" onChange={handleChange}>
-                <option value="" disabled selected>Sort</option>
-                <option value="title">title</option>
-                <option value="rating">rating</option>
-                <option value="year">year</option>
+                <option value="" disabled>Sort</option>
+                <option value="title" selected={sort === "title" ? true : false}>title</option>
+                <option value="rating" selected={sort === "rating" ? true : false}>rating</option>
+                <option value="year" selected={sort === "year" ? true : false}>year</option>
               </select>
 
               <select className="select select-bordered w-full max-w-xs" name="order" onChange={handleChange}>
-                <option value="" disabled selected>Order</option>
-                <option value="asc">asc</option>
-                <option value="desc">desc</option>
+                <option value="" disabled>Order</option>
+                <option value="asc" selected={order === "asc" ? true : false}>asc</option>
+                <option value="desc" selected={order === "desc" ? true : false}>desc</option>
               </select>
             </div>
 
@@ -120,7 +122,7 @@ const AllReviews = () => {
           post ? <>
             <section className="w-11/12 mx-auto flex flex-wrap items-center justify-center gap-4">
               {
-                post?.map(
+                navigation.state === "loading" && navigation.location.pathname === "/all-reviews" ? <Loader /> : post?.map(
                   item => <div className="card lg:card-side bg-base-100 shadow-xl" key={item._id}>
                     <figure className="max-md:h-64 md:max-w-96 lg:max-w-60">
                       <img
@@ -133,7 +135,7 @@ const AllReviews = () => {
                       <p className="hidden max-md:block">{item.review_description.length > 230 ? item.review_description.slice(0, 230) + "..." : item.review_description}</p>
                       <p className="max-w-[35ch] max-md:hidden">{item.review_description.length > 120 ? item.review_description.slice(0, 120) + "..." : item.review_description}</p>
 
-                      <p className="inline-flex items-center gap-1"> Rating:
+                      <div className="inline-flex items-center gap-1"> Rating:
                         <span>
                           <ReactStars
                             count={10}
@@ -143,7 +145,7 @@ const AllReviews = () => {
                             activeColor="oklch(var(--wa))"
                           />
                         </span>
-                      </p>
+                      </div>
 
                       <p className="inline-flex items-center gap-1"> Released Year:
                         <span>
@@ -178,23 +180,23 @@ const AllReviews = () => {
                       type="radio"
                       name="options"
                       aria-label={item}
-                      defaultChecked={
-                        fetchObj.skip === 0 && item === 1 ? true :
-                          fetchObj.skip / fetchObj.limit === item ? true : false
+                      checked={
+                        parseInt(page) === item ? true : false
                       }
-                      onClick={
-                        () => setFetchObj(prev => {
-                          return { ...prev, skip: (item - 1) * prev.limit }
-                        })
+                      onChange={
+                        (e) => {
+                          // setPostLoading(true)
+                          setSearchParams({ sort, order, genre, limit, "page": parseInt(e.target.ariaLabel) })
+                        }
                       }
                     />
                   )
                 }
 
-              </div> : error ? <p className="text-center text-red-500 mt-8">{error}</p> : <Loader />
+              </div> : error && !postCount ? <p className="text-center text-red-500 mt-8">fetching pagination failed</p> : <Loader />
             }
 
-          </> : error ? <p className="text-center text-red-500">{error}</p> : <Loader />
+          </> : error ? <p className="text-center text-red-500">fetch failed</p> : <Loader />
         }
 
       </div>

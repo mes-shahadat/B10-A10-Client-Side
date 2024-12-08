@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import querySearch from "stringquery";
+
 import UserLayout from "../layouts/UserLayout";
 import AllReviews from "../pages/AllReviews";
 import MyReviews from "../pages/MyReviews";
@@ -17,7 +19,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <UserLayout />,
-        errorElement: <Error/>,
+        errorElement: <Error />,
         children: [
             {
                 path: "",
@@ -27,11 +29,29 @@ export const router = createBrowserRouter([
             {
                 path: "all-reviews",
                 element: <AllReviews />,
+                loader: async ({ request }) => {
+
+                    const { sort, order, genre, limit, skip, page } = querySearch(request.url.match(/\?.+/)[0]);
+
+                    const arr = await Promise.all(
+                        [
+                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}&skip=${limit * (page - 1)}`)
+                                .then(res => res.json())
+                                .catch(() => null),
+
+                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews-count?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}&skip=${skip}`)
+                                .then(res => res.json())
+                                .catch(() => null)
+                        ]
+                    )
+
+                    return arr;
+                }
             },
             {
                 path: "/review/:id",
-                element: <PrivateRoute> <ReviewDetails/> </PrivateRoute>,
-                loader: ({params}) => fetch(`https://b10-a10-server-side-nine.vercel.app/review/${params.id}`),
+                element: <PrivateRoute> <ReviewDetails /> </PrivateRoute>,
+                loader: ({ params }) => fetch(`https://b10-a10-server-side-nine.vercel.app/review/${params.id}`),
             },
             {
                 path: "add-review",
@@ -51,7 +71,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "forgot-password",
-                element: <ForgotPassword/>
+                element: <ForgotPassword />
             },
             {
                 path: "register",
@@ -59,7 +79,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "update-profile",
-                element: <PrivateRoute> <UpdateProfile/> </PrivateRoute>
+                element: <PrivateRoute> <UpdateProfile /> </PrivateRoute>
             },
         ]
     },

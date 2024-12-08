@@ -3,10 +3,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../utils/AuthProvider";
 import Loader from "../components/Loader";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Register = () => {
 
-  const { createUser, updateUser, user, loginGoogleUser, loading, btnLoading, setBtnLoading } = useContext(AuthContext);
+  const { createUser, updateUser, user, loginGoogleUser, loading, useBtnLoader } = useContext(AuthContext);
+  const { btnLoading, setBtnLoading } = useBtnLoader();
 
   const { state } = useLocation();
 
@@ -63,12 +65,17 @@ const Register = () => {
 
     createUser(e.target.email.value, e.target.password.value, () => updateUser({
       displayName: e.target.name.value, photoURL: e.target.photo_url.value, email: e.target.email.value
-    }))
+    })).finally(() => setBtnLoading(false));
 
   }
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Chill Gamer - register</title>
+        </Helmet>
+      </HelmetProvider>
       {
         loading ? <h3 className="text-5xl relative left-1/2 -translate-x-1/2 font-bold py-48 inline-flex">Loading{<Loader />}</h3> : <>
 
@@ -79,7 +86,7 @@ const Register = () => {
 
               <form className="p-10 space-y-4 " onSubmit={e => handleSubmit(e)}>
 
-                <input type="text" placeholder="Name" className="input input-bordered w-full" name="name" />
+                <input type="text" placeholder="Name" className="input input-bordered w-full" name="name" required />
 
                 <input type="text" placeholder="Photo URL" className="input input-bordered w-full" name="photo_url" />
 
@@ -104,12 +111,14 @@ const Register = () => {
                 <div className="flex w-full flex-col border-opacity-50 pt-4">
                   <button className="card rounded-box grid place-items-center border border-accent h-12 bg-accent" type="submit">{btnLoading ? <Loader size="loading-sm" /> : "Register"}</button>
                   <div className="divider">OR</div>
-                  <button className="card bg-base-100 rounded-box grid place-items-center border h-12" type="button" onClick={loginGoogleUser}>Google</button>
+                  <button className="card bg-base-100 rounded-box grid place-items-center border h-12" type="button" onClick={
+                    () => loginGoogleUser().finally(() => setBtnLoading(false))
+                  }>Google</button>
                 </div>
 
               </form>
 
-              <p className="font-semibold text-center pb-8">Already have an account ? <Link className="text-info" to='/login' state={state}>Log In</Link></p>
+              <p className="font-semibold text-center pb-8">Already have an account ? <Link className="text-info" to='/login' state={state} replace={true}>Log In</Link></p>
             </div>
           }
 

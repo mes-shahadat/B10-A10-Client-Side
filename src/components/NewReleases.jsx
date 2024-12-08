@@ -16,7 +16,7 @@ const NewReleases = () => {
 
     return (
         <>
-            <h2 className="text-center text-4xl font-bold my-16">NEW RELEASED GAMES</h2>
+            <h2 className="text-center text-4xl font-bold mb-16 mt-28">NEW RELEASED GAMES</h2>
             {
                 post ? <div className="flex flex-wrap gap-4 items-center justify-center">
                     {
@@ -24,6 +24,7 @@ const NewReleases = () => {
                             item => <Link
                                 to={`/review/${item._id}`}
                                 key={item._id}
+                                className="border focus:opacity-50"
                             >
                                 <div className="card bg-base-100 image-full max-w-80 shadow-xl overflow-hidden">
 
@@ -31,7 +32,8 @@ const NewReleases = () => {
                                         <img
                                             className="z-20"
                                             src={item.game_cover}
-                                            alt="" />
+                                            alt="" 
+                                            loading="lazy"/>
                                     </figure>
 
                                     <div className="card-body self-end gap-1 p-4 bg-black/30 backdrop-blur-sm">

@@ -46,7 +46,7 @@ export const Nav = () => {
 
   const navlinks = <>
     <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/all-reviews">All Reviews</NavLink></li>
+    <li><NavLink to="/all-reviews?sort=title&order=asc&genre=&limit=10&page=1">All Reviews</NavLink></li>
     <li><NavLink to="/add-review">Add Review</NavLink></li>
     <li><NavLink to="/my-reviews">My Reviews</NavLink></li>
     <li><NavLink to="/my-watchlist">Game Watchlist</NavLink></li>

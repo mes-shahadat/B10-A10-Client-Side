@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthProvider";
 import { Link } from "react-router-dom";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const ForgotPassword = () => {
 
@@ -16,6 +17,12 @@ const ForgotPassword = () => {
 
     return (
         <>
+
+            <HelmetProvider>
+                <Helmet>
+                    <title>Chill Gamer - Forgot Password</title>
+                </Helmet>
+            </HelmetProvider>
 
             <div className="max-sm:w-[95%] max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
 

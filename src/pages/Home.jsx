@@ -6,12 +6,13 @@ import NewReleases from "../components/NewReleases";
 import Recommended from "../components/Recommended";
 import HighestRated from "../components/HighestRated";
 import { LocalStorageContext } from "../utils/LocalStorageProvider";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Home = () => {
 
   const data = useLoaderData();
 
-  const {radioChecked} = useContext(LocalStorageContext);
+  const { radioChecked } = useContext(LocalStorageContext);
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
@@ -66,6 +67,12 @@ const Home = () => {
 
   return (
     <>
+      <HelmetProvider>
+        <Helmet>
+          <title>Chill Gamer - home</title>
+        </Helmet>
+      </HelmetProvider>
+
       <div className="navigation-wrapper">
         <div ref={sliderRef} className="keen-slider -mt-16 ">
           {
@@ -82,7 +89,7 @@ const Home = () => {
       </div>
 
       {loaded && instanceRef.current && (
-        <div className="dots -mt-8 relative z-10">
+        <div className="dots -mt-16 relative z-10">
           {[
             ...Array(instanceRef.current.track.details?.slides.length).keys(),
           ].map((idx) => {

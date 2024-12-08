@@ -3,14 +3,19 @@ import ReactStars from "react-rating-stars-component";
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthProvider";
 import { toast } from 'react-toastify';
+import Loader from "../components/Loader";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const ReviewDetails = () => {
 
     const details = useLoaderData();
-    const { user } = useContext(AuthContext);
+    const { user, useBtnLoader } = useContext(AuthContext);
+
+    const { btnLoading, setBtnLoading } = useBtnLoader();
 
     const addToWatchlist = (id) => {
 
+        setBtnLoading(true);
         fetch(`https://b10-a10-server-side-nine.vercel.app/my-watchlist/`, {
 
             method: 'POST',
@@ -60,12 +65,18 @@ const ReviewDetails = () => {
                     position: "bottom-right"
                 })
             })
+            .finally(() => setBtnLoading(false))
 
     }
 
     return (
         <>
-            <h2 className="text-center text-4xl font-bold my-16">Details</h2>
+            <HelmetProvider>
+                <Helmet>
+                    <title>Chill Gamer - review details</title>
+                </Helmet>
+            </HelmetProvider>
+            <h2 className="text-center text-4xl font-bold my-16">Review Details</h2>
             <section className="sm:w-11/12 mx-auto mb-16 p-2">
                 <div className="card glass max-w-[640px] mx-auto">
                     <figure className="relative">
@@ -78,9 +89,9 @@ const ReviewDetails = () => {
                     </figure>
                     <div className="card-body p-4 md:p-8">
 
-                        <p className="flex gap-2">Titles:
-                            <h2 className="card-title">{details.title}</h2>
-                        </p>
+                        <h2 className="flex gap-2">Titles:
+                            <span className="card-title">{details.title}</span>
+                        </h2>
 
 
                         <p>Genre:
@@ -110,11 +121,11 @@ const ReviewDetails = () => {
                             }
                         </div>
 
-                        <p className="mt-2">Released year: 
+                        <p className="mt-2">Released year:
                             <span className="font-semibold"> {details.publishing_year}</span>
                         </p>
 
-                        <p className="flex items-center gap-2">Rating:
+                        <div className="flex items-center gap-2">Rating:
                             <ReactStars
                                 count={10}
                                 value={details.rating}
@@ -122,7 +133,7 @@ const ReviewDetails = () => {
                                 edit={false}
                                 activeColor="oklch(var(--wa))"
                             />
-                        </p>
+                        </div>
 
                         <p className="text-xl font-bold mt-4">Info:</p>
 
@@ -140,7 +151,7 @@ const ReviewDetails = () => {
                         <div className="card-actions justify-end mt-2">
                             <button className="btn border border-base-300" onClick={
                                 () => addToWatchlist(details._id)
-                            }>Add to WatchList</button>
+                            }>{btnLoading ? <Loader size="loading-sm" /> : "Add to WatchList"}</button>
                         </div>
                     </div>
                 </div>
