@@ -6,9 +6,8 @@ import Loader from "../components/Loader";
 
 const Login = () => {
 
-  const { loading } = useContext(AuthContext);
+  const { loginUser, user, loginGoogleUser, loading, btnLoading, setBtnLoading } = useContext(AuthContext)
 
-  const { loginUser, user, loginGoogleUser } = useContext(AuthContext)
   const { state } = useLocation();
 
   const [passwordShown, setPasswordShown] = useState(false)
@@ -22,6 +21,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setBtnLoading(true);
+
     loginUser(e.target.email.value, e.target.password.value)
   }
 
@@ -31,38 +32,48 @@ const Login = () => {
         loading ? <h3 className="text-5xl relative left-1/2 -translate-x-1/2 font-bold py-48 inline-flex">Loading{<Loader />}</h3> : <>
 
           {
-            user ? <Navigate to={state || "/"} replace={true} /> : <div className="max-sm:w-[95%] max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
+            user ? <Navigate to={state || "/"} replace={true} /> : <>
 
-              <p className="text-xl font-bold text-center pt-8">Login</p>
+              {state ? <p
+                className="text-center text-red-500 my-8 uppercase">
+                you need to login for accessing this page
+              </p> : null}
 
-              <form className="p-10 space-y-4 " onSubmit={e => handleSubmit(e)}>
+              <div className="max-sm:w-[95%] max-w-[500px] mx-auto my-9 bg-base-300 rounded-lg">
 
-                <input type="email" placeholder="Email" className="input input-bordered w-full" name="email" required />
+                <p className="text-xl font-bold text-center pt-8">Login</p>
 
-                <div className="relative">
+                <form className="p-10 space-y-4 " onSubmit={e => handleSubmit(e)}>
 
-                  <input type="password" placeholder="Password" className="input input-bordered w-full" name="password" ref={passwordRef} required />
+                  <input type="email" placeholder="Email" className="input input-bordered w-full" name="email" required />
 
-                  <div className="absolute top-3 right-3 text-2xl" onClick={handleClick}>
-                    {
-                      passwordShown ? <FaRegEyeSlash /> : <FaRegEye />
-                    }
+                  <div className="relative">
+
+                    <input type="password" placeholder="Password" className="input input-bordered w-full" name="password" ref={passwordRef} required />
+
+                    <div className="absolute top-3 right-3 text-2xl" onClick={handleClick}>
+                      {
+                        passwordShown ? <FaRegEyeSlash /> : <FaRegEye />
+                      }
+                    </div>
+
                   </div>
 
-                </div>
+                  <Link to='/forgot-password' className="inline-block text-sm hover:underline">Forgot Password ?</Link>
 
-                <Link to='/forgot-password' className="inline-block text-sm hover:underline">Forgot Password ?</Link>
+                  <div className="flex w-full">
+                    <button className="card bg-base-100 rounded-box grid flex-grow place-items-center border" type="button" onClick={loginGoogleUser}>Google</button>
 
-                <div className="flex w-full">
-                  <button className="card bg-base-100 rounded-box grid flex-grow place-items-center border" type="button" onClick={loginGoogleUser}>Google</button>
-                  <div className="divider divider-horizontal">OR</div>
-                  <button className="card rounded-box grid flex-grow place-items-center border border-accent bg-accent" type="submit">Login</button>
-                </div>
+                    <div className="divider divider-horizontal">OR</div>
 
-              </form>
+                    <button className="card rounded-box grid flex-grow place-items-center border border-accent bg-accent" type="submit">{btnLoading ? <Loader size="loading-sm" /> : "Login"}</button>
+                  </div>
 
-              <p className="font-semibold text-center pb-8">Don't have an account ? <Link className="text-info" to="/register" >Sign Up</Link></p>
-            </div>
+                </form>
+
+                <p className="font-semibold text-center pb-8">Don't have an account ? <Link className="text-info" to="/register" state={state}>Sign Up</Link></p>
+              </div>
+            </>
           }
 
         </>

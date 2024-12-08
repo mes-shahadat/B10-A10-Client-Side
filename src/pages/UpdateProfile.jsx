@@ -2,14 +2,17 @@ import { useContext } from 'react';
 import { AuthContext } from '../utils/AuthProvider';
 import userImg from "../assets/user.png"
 import { Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 
 const UpdateProfile = () => {
 
-    const { user, updateUser } = useContext(AuthContext);
+    const { user, updateUser, btnLoading, setBtnLoading } = useContext(AuthContext);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setBtnLoading(true);
+
         updateUser({
             displayName: e.target.name.value,
             photoURL: e.target.photo_url.value
@@ -37,7 +40,7 @@ const UpdateProfile = () => {
 
                 <Link className="text-sm inline-block m-1 hover:underline" to='/forgot-password'>Forgot Password ?</Link>
 
-                <button className="w-full py-3 font-semibold rounded-lg border border-accent bg-accent" type="submit">Update Information</button>
+                <button className="w-full py-3 font-semibold rounded-lg border border-accent bg-accent" type="submit">{btnLoading ? <Loader margin="my-0" size="loading-sm"/> : "Update Information"}</button>
             </form>
 
         </div>

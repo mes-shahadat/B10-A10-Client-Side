@@ -4,22 +4,23 @@ import Loader from "./Loader";
 
 const NewReleases = () => {
 
-    const [user, setUser] = useState(null);
+    const [post, setPost] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:3000/new-release?limit=8")
             .then(res => res.json())
-            .then(data => setUser(data))
-            .catch(err => console.log(err))
+            .then(data => setPost(data))
+            .catch(() => setError("fetch failed"))
     }, [])
 
     return (
         <>
             <h2 className="text-center text-4xl font-bold my-16">NEW RELEASED GAMES</h2>
             {
-                user ? <div className="flex flex-wrap gap-4 items-center justify-center">
+                post ? <div className="flex flex-wrap gap-4 items-center justify-center">
                     {
-                        user?.map(
+                        post?.map(
                             item => <div key={item._id} className="card card-compact bg-base-100 w-80 shadow-xl">
                                 <figure>
                                     <img
@@ -53,7 +54,7 @@ const NewReleases = () => {
                         )
                     }
 
-                </div> : <Loader />
+                </div> : error ? <p className="text-center text-red-500">fetch failed</p> : <Loader />
 
             }
 

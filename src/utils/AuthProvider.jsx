@@ -7,9 +7,10 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
 
-    
+
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [btnLoading, setBtnLoading] = useState(false)
 
     const loginGoogleUser = () => {
 
@@ -24,7 +25,8 @@ const AuthProvider = ({ children }) => {
                 toast.error(error.message, {
                     position: "bottom-right"
                 })
-            });
+            })
+            .finally(()=> setBtnLoading(false));
     }
 
     const createUser = (email, password, callback) => {
@@ -40,7 +42,8 @@ const AuthProvider = ({ children }) => {
                 toast.error(error.message, {
                     position: "bottom-right"
                 })
-            });
+            })
+            .finally(()=> setBtnLoading(false));
     }
 
     const updateUser = (obj) => {
@@ -55,7 +58,8 @@ const AuthProvider = ({ children }) => {
                 toast.error(error.message, {
                     position: "bottom-right"
                 })
-            });
+            })
+            .finally(()=> setBtnLoading(false));
     }
 
     const loginUser = (email, password) => {
@@ -72,7 +76,9 @@ const AuthProvider = ({ children }) => {
                 toast.error(error.message, {
                     position: "bottom-right"
                 })
-            });
+            })
+            .finally(()=> setBtnLoading(false))
+
     }
 
     const logOut = () => {
@@ -113,7 +119,7 @@ const AuthProvider = ({ children }) => {
                 } else {
                     setUser(null);
                 }
-                
+
                 setLoading(false);
             })
 
@@ -126,13 +132,15 @@ const AuthProvider = ({ children }) => {
 
         user,
         loading,
+        btnLoading,
+        setBtnLoading,
         setUser,
         createUser,
         loginUser,
         logOut,
         updateUser,
         resetUserPassword,
-        loginGoogleUser, 
+        loginGoogleUser,
         setLoading
     }
     return (
