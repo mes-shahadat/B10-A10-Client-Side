@@ -26,11 +26,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "all-reviews",
-                element: <AllReviews />
+                element: <AllReviews />,
             },
             {
                 path: "/review/:id",
-                element: <ReviewDetails/>
+                element: <PrivateRoute> <ReviewDetails/> </PrivateRoute>,
+                loader: ({params}) => fetch(`https://b10-a10-server-side-nine.vercel.app/review/${params.id}`),
             },
             {
                 path: "add-review",
