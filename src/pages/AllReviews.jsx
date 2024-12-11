@@ -54,14 +54,7 @@ const AllReviews = () => {
 
   useEffect(() => {
 
-    let arr = [];
-
-    if (postCount) {
-      for (let i = 0; i < Math.ceil(postCount.count / limit); i++) {
-        arr.push(i + 1)
-      }
-    }
-    setPaginationNumber(arr)
+    setPaginationNumber(Array(Math.ceil(postCount.count / limit)).fill("dummy"))
 
   }, [postCount])
 
@@ -122,7 +115,7 @@ const AllReviews = () => {
             <section className="w-11/12 mx-auto flex flex-wrap items-center justify-center gap-4">
               {
                 navigation.state === "loading" && navigation.location.pathname === "/all-reviews" ? <Loader /> : post?.map(
-                  item => <div className="card lg:card-side bg-base-100 shadow-xl" key={item._id}>
+                  item => <div className="card lg:card-side bg-base-100 shadow-xl border border-base-content/10" key={item._id}>
                     <figure className="max-md:h-64 md:max-w-96 lg:max-w-60">
                       <img
                         className="w-full h-full object-cover"
@@ -173,18 +166,17 @@ const AllReviews = () => {
 
                 {
                   paginationNumber?.map(
-                    (item) => <input
-                      key={item}
+                    (item, idx) => <input
+                      key={idx}
                       className="join-item btn btn-square"
                       type="radio"
                       name="options"
-                      aria-label={item}
+                      aria-label={idx + 1}
                       checked={
-                        parseInt(page) === item ? true : false
+                        parseInt(page) === idx + 1 ? true : false
                       }
                       onChange={
                         (e) => {
-                          // setPostLoading(true)
                           setSearchParams({ sort, order, genre, limit, "page": parseInt(e.target.ariaLabel) })
                         }
                       }

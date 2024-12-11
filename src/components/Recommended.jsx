@@ -22,9 +22,10 @@ const Recommended = () => {
                 post ? <div className="flex flex-wrap gap-4 items-center justify-center">
                     {
                         post?.map(
-                            item => <div key={item._id} className="card card-compact bg-base-100 w-80 shadow-xl">
-                                <figure>
+                            item => <div key={item._id} className="card card-compact bg-base-100 w-80 shadow-xl border border-base-content/10">
+                                <figure className="max-h-80">
                                     <img
+                                        className="w-full h-full"
                                         src={item.game_cover} 
                                         loading="lazy"
                                         />

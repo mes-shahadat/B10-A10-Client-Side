@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from "daisyui"
-import { retro } from "daisyui/src/theming/themes"
+import { dracula, retro } from "daisyui/src/theming/themes"
 
 export default {
   content: [
@@ -21,9 +21,16 @@ export default {
             backgroundColor: "transparent",
           },
         },
+        dracula: {
+          ...dracula,
+          ".badge": {
+            borderRadius: "0.4rem"
+          },
+        },
       },
       
       "dracula",
+      "black",
     ],
     darkTheme: "dracula",
     base: true,

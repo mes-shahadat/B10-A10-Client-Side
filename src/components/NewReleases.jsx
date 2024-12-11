@@ -24,16 +24,16 @@ const NewReleases = () => {
                             item => <Link
                                 to={`/review/${item._id}`}
                                 key={item._id}
-                                className="border focus:opacity-50"
+                                className="focus:opacity-70 focus:animate-pulse"
                             >
-                                <div className="card bg-base-100 image-full max-w-80 shadow-xl overflow-hidden">
+                                <div className="card bg-base-100 image-full max-w-80 max-h-80 shadow-xl overflow-hidden border border-base-content/10">
 
                                     <figure>
                                         <img
-                                            className="z-20"
+                                            className="z-20 w-full"
                                             src={item.game_cover}
-                                            alt="" 
-                                            loading="lazy"/>
+                                            alt=""
+                                            loading="lazy" />
                                     </figure>
 
                                     <div className="card-body self-end gap-1 p-4 bg-black/30 backdrop-blur-sm">
@@ -43,11 +43,26 @@ const NewReleases = () => {
                                         </span>
                                         <div className="inline-flex flex-wrap gap-2 mt-2">
                                             {
-                                                item.platforms.map(
-                                                    (item, index) => <span key={index} className="badge badge-secondary">
-                                                        {item}
-                                                    </span>
-                                                )
+                                                item.platforms.length > 3 ? <>
+                                                    {
+                                                        item.platforms.slice(0, 2).map(
+                                                            (item, index) => <span key={index} className="badge badge-secondary">
+                                                                {item}
+                                                            </span>
+                                                        )
+                                                    }
+                                                    <div className="badge badge-secondary">
+                                                        <span className="-mt-2">...</span>
+                                                    </div>
+                                                </> : <>
+                                                    {
+                                                        item.platforms.map(
+                                                            (item, index) => <span key={index} className="badge badge-secondary">
+                                                                {item}
+                                                            </span>
+                                                        )
+                                                    }
+                                                </>
                                             }
                                         </div>
 

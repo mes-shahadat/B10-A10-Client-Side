@@ -26,14 +26,14 @@ const AddReview = () => {
     const platforms = isAtLeastOneChecked("platforms");
 
     if (!tags) {
-      toast.warn("Plz select tags", {
+      toast.warn("No tags selected !", {
         position: "bottom-right"
       })
       return
     }
 
     if (!platforms) {
-      toast.warn("Plz select platforms", {
+      toast.warn("No platforms selected !", {
         position: "bottom-right"
       })
       return
@@ -113,12 +113,12 @@ const AddReview = () => {
       .then(data => setGenres(data))
       .catch(() => setGenres(["fetch failed"]))
 
-    fetch(`http://localhost:3000/tags`)
+    fetch(`https://b10-a10-server-side-nine.vercel.app/tags`)
       .then(res => res.json())
       .then(data => setTags(data))
       .catch(() => setTags(["fetch failed"]))
 
-    fetch(`http://localhost:3000/platforms`)
+    fetch(`https://b10-a10-server-side-nine.vercel.app/platforms`)
       .then(res => res.json())
       .then(data => setPlatforms(data))
       .catch(() => setPlatforms(["fetch failed"]))
@@ -196,10 +196,10 @@ const AddReview = () => {
                     <div className="label">
                       <span className="label-text">Game Genre: </span>
                     </div>
-                    <select className="select select-bordered" name="genre" required>
+                    <select className={genres?.[0] === "fetch failed" ? "select select-bordered bg-red-300" : "select select-bordered"} name="genre" required>
                       <option value=""></option>
                       {
-                        genres?.map(
+                        genres?.[0] === "fetch failed" ? null : genres?.map(
                           (item, index) => <option
                             key={index}
                             value={item}
@@ -221,9 +221,9 @@ const AddReview = () => {
 
                     <div className="collapse-content">
 
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[230px] overflow-y-scroll">
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[230px] overflow-y-scroll select-none">
                         {
-                          tags?.map(
+                          tags?.[0] === "fetch failed" ? <p className="text-center text-red-500">fetch failed</p> : tags?.map(
                             (item, index) => <label className="cursor-pointer inline-flex items-center gap-4" key={index}>
                               <input type="checkbox" className="checkbox checkbox-accent" name="tags" value={item} />
                               <span className="label-text">{item}</span>
@@ -240,9 +240,9 @@ const AddReview = () => {
 
                     <div className="collapse-content">
 
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:max-h-[132px] overflow-y-scroll">
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:max-h-[132px] overflow-y-scroll select-none">
                         {
-                          platforms?.map(
+                          platforms?.[0] === "fetch failed" ? <p className="text-center text-red-500">fetch failed</p> : platforms?.map(
                             (item, index) => <label className="cursor-pointer inline-flex items-center gap-4" key={index}>
                               <input type="checkbox" className="checkbox checkbox-accent" name="platforms" value={item} />
                               <span className="label-text">{item}</span>
@@ -262,41 +262,12 @@ const AddReview = () => {
                         data-tooltip-id="my-tooltip" data-tooltip-content={1}
                         defaultChecked required />
 
-                      <input type="radio" name="rating" value={2}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={2} />
+                      {
+                        Array.from({ length: 9 }, (i, idx) => <input type="radio" name="rating" value={idx + 2} key={idx}
+                          className="mask mask-star-2 bg-orange-400  max-sm:w-5"
+                          data-tooltip-id="my-tooltip" data-tooltip-content={idx + 2} />)
+                      }
 
-                      <input type="radio" name="rating" value={3}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={3} />
-
-                      <input type="radio" name="rating" value={4}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={4} />
-
-                      <input type="radio" name="rating" value={5}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={5} />
-
-                      <input type="radio" name="rating" value={6}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={6} />
-
-                      <input type="radio" name="rating" value={7}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={7} />
-
-                      <input type="radio" name="rating" value={8}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={8} />
-
-                      <input type="radio" name="rating" value={9}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={9} />
-
-                      <input type="radio" name="rating" value={10}
-                        className="mask mask-star-2 bg-orange-400  max-sm:w-5"
-                        data-tooltip-id="my-tooltip" data-tooltip-content={10} />
                     </div>
 
                   </div>

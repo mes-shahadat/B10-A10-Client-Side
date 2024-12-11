@@ -81,6 +81,7 @@ const ReviewDetails = () => {
                 <div className="card glass max-w-[640px] mx-auto">
                     <figure className="relative">
                         <img
+                        className="w-full"
                             src={details.game_cover}
                             alt={details.title + " cover image"} />
                         {

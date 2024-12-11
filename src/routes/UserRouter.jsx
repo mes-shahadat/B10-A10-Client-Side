@@ -12,6 +12,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import PrivateRoute from "../components/PrivateRoute";
 import UpdateProfile from "../pages/UpdateProfile";
 import ReviewDetails from "../pages/ReviewDetails";
+import UpdateReview from "../pages/UpdateReview";
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +66,33 @@ export const router = createBrowserRouter([
             {
                 path: "my-reviews",
                 element: <PrivateRoute> <MyReviews /> </PrivateRoute>,
+            },
+            {
+                path: "update-review/:id",
+                element: <PrivateRoute> <UpdateReview /> </PrivateRoute>,
+                loader: async ({ params }) => {
+
+                    const arr = await Promise.all([
+
+                        fetch(`https://b10-a10-server-side-nine.vercel.app/update-review/${params.id}`)
+                            .then(res => res.json())
+                            .catch(() => null),
+
+                        fetch(`https://b10-a10-server-side-nine.vercel.app/genres`)
+                            .then(res => res.json())
+                            .catch(() => ["fetch failed"]),
+
+                        fetch(`https://b10-a10-server-side-nine.vercel.app/tags`)
+                            .then(res => res.json())
+                            .catch(() => ["fetch failed"]),
+
+                        fetch(`https://b10-a10-server-side-nine.vercel.app/platforms`)
+                            .then(res => res.json())
+                            .catch(() => ["fetch failed"])
+                    ])
+
+                    return arr
+                }
             },
             {
                 path: "my-watchlist",

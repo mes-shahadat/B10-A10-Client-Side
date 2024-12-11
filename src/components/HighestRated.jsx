@@ -23,23 +23,39 @@ const HighestRated = () => {
                 post ? <div className="flex flex-wrap gap-4 items-center justify-center">
                     {
                         post?.map(
-                            item => <div key={item._id} className="card card-compact bg-base-100 w-80 shadow-xl">
-                                <figure>
+                            item => <div key={item._id} className="card card-compact bg-base-100 max-w-80 shadow-xl border border-base-content/10">
+                                <figure className="max-h-80">
                                     <img
-                                        src={item.game_cover} 
+                                    className="w-full"
+                                        src={item.game_cover}
                                         loading="lazy"
-                                        />
+                                    />
                                 </figure>
                                 <div className="card-body items-center text-center">
                                     <h2 className="card-title">{item.title.length > 27 ? item.title.slice(0, 24) + "..." : item.title}</h2>
 
                                     <div className="inline-flex flex-wrap gap-2 my-2">
                                         {
-                                            item.tags.map(
-                                                (item, index) => <span key={index} className="badge badge-accent">
-                                                    {item}
-                                                </span>
-                                            )
+                                            item.tags.length > 3 ? <>
+                                                {
+                                                    item.tags.slice(0, 2).map(
+                                                        (item, index) => <span key={index} className="badge badge-accent">
+                                                            {item}
+                                                        </span>
+                                                    )
+                                                }
+                                                <div className="badge badge-accent">
+                                                    <span className="-mt-2">...</span>
+                                                </div>
+                                            </> : <>
+                                                {
+                                                    item.tags.map(
+                                                        (item, index) => <span key={index} className="badge badge-accent">
+                                                            {item}
+                                                        </span>
+                                                    )
+                                                }
+                                            </>
                                         }
                                     </div>
 
