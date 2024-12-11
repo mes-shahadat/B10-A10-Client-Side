@@ -26,3 +26,11 @@
 .dot.active {
     background: oklch(var(--er));
 }
+
+/* label:has(input:checked) {
+    color: red !important
+}
+
+[type="radio"]:checked {
+    color: red !important
+} */

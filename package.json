@@ -20,8 +20,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^7.0.2",
     "react-toastify": "^10.0.6",
-    "react-tooltip": "^5.28.0",
-    "stringquery": "^1.0.8"
+    "react-tooltip": "^5.28.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

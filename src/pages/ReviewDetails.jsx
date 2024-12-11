@@ -82,7 +82,7 @@ const ReviewDetails = () => {
                     <figure className="relative">
                         <img
                             src={details.game_cover}
-                            alt="" />
+                            alt={details.title + " cover image"} />
                         {
                             details.is_recommended && <p className="absolute bottom-2 left-2 bg-error text-neutral-content px-2 rounded-lg">Recommended</p>
                         }
@@ -139,11 +139,11 @@ const ReviewDetails = () => {
 
                         <p className="mb-2">{details.review_description}</p>
 
-                        <p>Author Name:
+                        <p className="text-sm">Author Name:
                             <span className="font-semibold"> {details.user_name}</span>
                         </p>
 
-                        <div className="flex gap-1">
+                        <div className="flex gap-1 text-sm">
                             <span className="w-max ">Author Email:</span>
                             <span className="font-semibold w-max inline-block"> {details.user_email.split("@")[0]}<wbr />@{details.user_email.split("@")[1]}</span>
                         </div>

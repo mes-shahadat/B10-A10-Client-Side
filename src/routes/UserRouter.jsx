@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import querySearch from "stringquery";
-
 import UserLayout from "../layouts/UserLayout";
 import AllReviews from "../pages/AllReviews";
 import MyReviews from "../pages/MyReviews";
@@ -31,15 +29,22 @@ export const router = createBrowserRouter([
                 element: <AllReviews />,
                 loader: async ({ request }) => {
 
-                    const { sort, order, genre, limit, skip, page } = querySearch(request.url.match(/\?.+/)[0]);
+                    const url = new URL(request.url)
+
+                    const sort = url.searchParams.get('sort') || "title";
+                    const order = url.searchParams.get('order') || "asc";
+                    const genre = url.searchParams.get('genre') || "";
+                    const limit = url.searchParams.get('limit') || 10;
+                    const page = url.searchParams.get('page') || 1;
+
 
                     const arr = await Promise.all(
                         [
-                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}&skip=${limit * (page - 1)}`)
+                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}&skip=${limit * (page - 1) || 0}`)
                                 .then(res => res.json())
                                 .catch(() => null),
 
-                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews-count?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}&skip=${skip}`)
+                            fetch(`https://b10-a10-server-side-nine.vercel.app/reviews-count?sort=${sort}&order=${order}&genre=${genre}&limit=${limit}`)
                                 .then(res => res.json())
                                 .catch(() => null)
                         ]
@@ -59,7 +64,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "my-reviews",
-                element: <PrivateRoute> <MyReviews /> </PrivateRoute>
+                element: <PrivateRoute> <MyReviews /> </PrivateRoute>,
             },
             {
                 path: "my-watchlist",

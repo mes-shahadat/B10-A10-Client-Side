@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router-dom"
-import logo from "../assets/logo.png"
-import userImg from "../assets/user.png"
 import { useContext, useEffect } from "react";
 import { LocalStorageContext } from "../utils/LocalStorageProvider";
 import { AuthContext } from "../utils/AuthProvider";
+import logo from "../assets/logo.png"
+import userImg from "../assets/user.png"
 
 export const Nav = () => {
 
@@ -45,16 +45,16 @@ export const Nav = () => {
   }, [radioChecked])
 
   const navlinks = <>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/all-reviews?sort=title&order=asc&genre=&limit=10&page=1">All Reviews</NavLink></li>
+    <li><NavLink to="/" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent" : isActive ? "active" : ""}>Home</NavLink></li>
+    <li><NavLink to="/all-reviews" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent" : isActive ? "active" : ""}>All Reviews</NavLink></li>
     <li><NavLink to="/add-review">Add Review</NavLink></li>
-    <li><NavLink to="/my-reviews">My Reviews</NavLink></li>
+    <li><NavLink to="/my-reviews" state={user?.email}>My Reviews</NavLink></li>
     <li><NavLink to="/my-watchlist">Game Watchlist</NavLink></li>
   </>
 
   return (
     <>
-      <div className="nav-container bg-base-100 w-full h-[68px] fixed z-40 transition-all duration-500 shadow-sm max-w-[2000px]">
+      <div className="nav-container bg-base-100 w-full h-[68px] fixed top-0 z-40 transition-all duration-500 shadow-sm max-w-[2000px]">
 
         <div className="navbar md:w-11/12 mx-auto">
 

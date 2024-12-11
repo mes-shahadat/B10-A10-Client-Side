@@ -13,7 +13,16 @@ const UserLayout = () => {
         <Outlet />
       </div>
       <Footer />
-      <Tooltip id="my-tooltip" style={{ backgroundColor: "oklch(var(--b3))", color: "oklch(var(--bc))" }} />
+      <Tooltip id="my-tooltip" 
+      style={
+        {
+          zIndex: "100", 
+          backgroundColor: "oklch(var(--b2))", 
+          color: "oklch(var(--bc))", 
+          outline: "1px solid oklch(var(--b1))", 
+          boxShadow: "0px 0px 3px 0px oklch(var(--bc))" 
+        }
+      } />
       <ToastContainer />
       {/* <div className="h-[100vh]"></div> */}
     </>

@@ -7,21 +7,20 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const AllReviews = () => {
 
-  const [post, postCount] = useLoaderData()
+  const [post, postCount] = useLoaderData();
   const [genres, setGenres] = useState(null);
   const [paginationNumber, setPaginationNumber] = useState([]);
   const [error, setError] = useState(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const navigation = useNavigation()
-  console.log(navigation)
 
   const { sort, order, genre, limit, page } = {
-    sort: searchParams.get("sort"),
-    order: searchParams.get("order"),
-    genre: searchParams.get("genre"),
-    limit: parseInt(searchParams.get("limit")),
-    page: parseInt(searchParams.get("page"))
+    sort: searchParams.get("sort") || "title",
+    order: searchParams.get("order") || "asc",
+    genre: searchParams.get("genre") || "",
+    limit: parseInt(searchParams.get("limit")) || 10,
+    page: parseInt(searchParams.get("page")) || 1
   }
 
   const handleChange = e => {
@@ -71,7 +70,7 @@ const AllReviews = () => {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>Chill Gamer - all reviews: {genre}</title>
+          <title>Chill Gamer - all reviews: {genre || "All"}</title>
         </Helmet>
       </HelmetProvider>
 
@@ -128,7 +127,7 @@ const AllReviews = () => {
                       <img
                         className="w-full h-full object-cover"
                         src={item.game_cover}
-                        alt="Album" />
+                        alt={item.title + " cover image"} />
                     </figure>
                     <div className="card-body p-4">
                       <h2 className="card-title">{item.title}</h2>
@@ -147,20 +146,20 @@ const AllReviews = () => {
                         </span>
                       </div>
 
-                      <p className="inline-flex items-center gap-1"> Released Year:
+                      <span className="inline-flex items-center gap-1"> Released Year:
                         <span>
                           {item.publishing_year}
                         </span>
-                      </p>
+                      </span>
 
 
-                      <p className="inline-flex items-center gap-1 mt-1"> Genre:
+                      <span className="inline-flex items-center gap-1 mt-1"> Genre:
                         <span className="badge badge-neutral">
                           {item.genre}
                         </span>
-                      </p>
+                      </span>
 
-                      <div className="card-actions justify-end">
+                      <div className="card-actions justify-center lg:justify-end mt-3">
                         <Link className="btn btn-primary" to={`/review/${item._id}`}>Explore Details</Link>
                       </div>
                     </div>
