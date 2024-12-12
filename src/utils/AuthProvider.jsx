@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
 
         const [btnLoading, setBtnLoading] = useState(bool || false)
 
-        return {btnLoading, setBtnLoading}
+        return { btnLoading, setBtnLoading }
     }
 
     const loginGoogleUser = () => {
@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            
+
     }
 
     const createUser = (email, password, callback) => {
@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            
+
     }
 
     const updateUser = (obj) => {
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            
+
     }
 
     const loginUser = (email, password) => {
@@ -84,13 +84,12 @@ const AuthProvider = ({ children }) => {
                     position: "bottom-right"
                 })
             })
-            
 
     }
 
     const logOut = () => {
 
-        signOut(auth).then(() => {
+        return signOut(auth).then(() => {
 
             toast.success("Log Out successfull", {
                 position: "bottom-right"

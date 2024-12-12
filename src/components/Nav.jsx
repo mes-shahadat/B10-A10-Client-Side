@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useContext, useEffect } from "react";
 import { LocalStorageContext } from "../utils/LocalStorageProvider";
 import { AuthContext } from "../utils/AuthProvider";
@@ -8,13 +8,14 @@ import userImg from "../assets/user.png"
 export const Nav = () => {
 
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const { radioChecked, setRadioChecked } = useContext(LocalStorageContext);
 
 
   useEffect(() => {
+    
     const toggle = document.querySelector('.navbar .theme-controller');
-
     const update = () => {
       setRadioChecked(prev => !prev)
     }
@@ -129,7 +130,12 @@ export const Nav = () => {
                     data-tooltip-content={user.displayName || "you"}
                     data-tooltip-place="top"
                   /></Link>
-                <NavLink className="btn " onClick={logOut}>Log Out</NavLink>
+                <NavLink className="btn " onClick={
+                  () => {
+                    setTimeout(()=>navigate("/"), 100)
+                    logOut()
+                  }
+                }>Log Out</NavLink>
               </div> : <div className="inline-flex space-x-2">
                 <NavLink className="btn" to="/login">Login</NavLink>
                 <NavLink className="btn max-sm:hidden" to="/register">Register</NavLink>

@@ -4,15 +4,15 @@ import { AuthContext } from "../utils/AuthProvider";
 
 const DeleteBtn = ({ fn }) => {
 
-    const {useBtnLoader} = useContext(AuthContext)
-    const {btnLoading, setBtnLoading} = useBtnLoader();
+    const { useBtnLoader } = useContext(AuthContext)
+    const { btnLoading, setBtnLoading } = useBtnLoader();
 
     return (
         <button
             className="btn btn-ghost btn-xs text-error"
-            onClick={()=>{
+            onClick={() => {
                 setBtnLoading(true)
-                fn().finally(()=> setBtnLoading(false))
+                fn(setBtnLoading)
             }}
         >
             {btnLoading ? <Loader size="loading-sm" margin="my-0" /> : "Delete"}

@@ -196,7 +196,7 @@ const AddReview = () => {
                     <div className="label">
                       <span className="label-text">Game Genre: </span>
                     </div>
-                    <select className={genres?.[0] === "fetch failed" ? "select select-bordered bg-red-300" : "select select-bordered"} name="genre" required>
+                    <select className={genres?.[0] === "fetch failed" ? "select select-bordered bg-red-500" : "select select-bordered"} name="genre" required>
                       <option value=""></option>
                       {
                         genres?.[0] === "fetch failed" ? null : genres?.map(

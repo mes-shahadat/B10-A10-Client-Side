@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthProvider";
 import { toast } from 'react-toastify';
@@ -16,7 +16,7 @@ const MyReviews = () => {
   const [noData, setNoData] = useState(false)
   const [error, setError] = useState(null);
 
-  const removeFromWatchlist = (id) => {
+  const removeFromWatchlist = (id, setLoading) => {
 
     return fetch(`https://b10-a10-server-side-nine.vercel.app/review/${id}/`, {
 
@@ -44,12 +44,14 @@ const MyReviews = () => {
             })
           }
         } else {
+          setLoading(false)
           toast.error("Data doesn't exists", {
             position: "bottom-right"
           })
         }
       })
       .catch((err) => {
+        setLoading(false)
         toast.error(err.message, {
           position: "bottom-right"
         })
@@ -224,8 +226,9 @@ const MyReviews = () => {
                           </div>
                         </td>
                         <th className="max-sm:text-center">
-                          <Link to={`/update-review/${item._id}`} className="btn btn-ghost btn-xs focus:text-info">Edit</Link> <br />
-                          <DeleteBtn fn={() => removeFromWatchlist(item._id)} />
+                          <NavLink to={`/update-review/${item._id}`} className={({ isPending }) => isPending ? "btn btn-ghost btn-xs !animate-pulse duration-75 !text-accent" : "btn btn-ghost btn-xs"}>Edit</NavLink>
+                          <br />
+                          <DeleteBtn fn={(setLoading) => removeFromWatchlist(item._id, setLoading)} />
                         </th>
                       </tr>
                     )

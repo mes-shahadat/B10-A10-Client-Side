@@ -16,7 +16,7 @@ const MyWatchlist = () => {
   const [noData, setNoData] = useState(false)
   const [error, setError] = useState(null);
 
-  const removeFromWatchlist = (id) => {
+  const removeFromWatchlist = (id, setLoader) => {
 
     return fetch(`https://b10-a10-server-side-nine.vercel.app/my-watchlist/${id}/`, {
 
@@ -46,6 +46,7 @@ const MyWatchlist = () => {
         }
       })
       .catch((err) => {
+        setLoader(false)
         toast.error(err.message, {
           position: "bottom-right"
         })
@@ -150,7 +151,7 @@ const MyWatchlist = () => {
                           </div>
                         </td>
                         <th>
-                          <DeleteBtn fn={() => removeFromWatchlist(item._id)} />
+                          <DeleteBtn fn={(setLoader) => removeFromWatchlist(item._id, setLoader)} />
                         </th>
                       </tr>
                     )
