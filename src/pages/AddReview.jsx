@@ -292,7 +292,7 @@ const AddReview = () => {
               </fieldset>
 
 
-              <button className="card rounded-box grid place-items-center mx-auto !mt-10 max-sm:!mb-8 border border-accent p-3 bg-accent" type="submit">{btnLoading ? <Loader size="loading-xs" margin="my-0" /> : "Add Review"}</button>
+              <button className="card rounded-box grid place-items-center mx-auto !mt-10 max-sm:!mb-8 border border-accent p-3 bg-accent" type="submit" disabled={btnLoading ? true : false}>{btnLoading ? <Loader size="loading-xs" margin="my-0" /> : "Add Review"}</button>
 
             </form>
 

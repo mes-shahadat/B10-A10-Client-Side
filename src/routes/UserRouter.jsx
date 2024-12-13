@@ -1,4 +1,3 @@
-import { createBrowserRouter } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import AllReviews from "../pages/AllReviews";
 import MyReviews from "../pages/MyReviews";
@@ -14,7 +13,7 @@ import UpdateProfile from "../pages/UpdateProfile";
 import ReviewDetails from "../pages/ReviewDetails";
 import UpdateReview from "../pages/UpdateReview";
 
-export const router = createBrowserRouter([
+export const router = [
     {
         path: "/",
         element: <UserLayout />,
@@ -116,4 +115,4 @@ export const router = createBrowserRouter([
             },
         ]
     },
-]);
+];

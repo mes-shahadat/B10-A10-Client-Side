@@ -77,7 +77,7 @@ const Login = () => {
 
                     <div className="divider divider-horizontal">OR</div>
 
-                    <button className="card rounded-box grid flex-grow place-items-center border border-accent bg-accent" type="submit">{btnLoading ? <Loader size="loading-sm" /> : "Login"}</button>
+                    <button className="card rounded-box grid flex-grow place-items-center border border-accent bg-accent" type="submit" disabled={btnLoading ? true : false}>{btnLoading ? <Loader size="loading-sm" /> : "Login"}</button>
                   </div>
 
                 </form>

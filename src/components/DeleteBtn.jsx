@@ -14,6 +14,7 @@ const DeleteBtn = ({ fn }) => {
                 setBtnLoading(true)
                 fn(setBtnLoading)
             }}
+            disabled={btnLoading ? true : false}
         >
             {btnLoading ? <Loader size="loading-sm" margin="my-0" /> : "Delete"}
         </button>

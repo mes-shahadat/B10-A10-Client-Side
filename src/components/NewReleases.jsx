@@ -8,7 +8,7 @@ const NewReleases = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://b10-a10-server-side-nine.vercel.app/new-release?limit=8")
+        fetch("https://b10-a10-server-side-nine.vercel.app/new-release?limit=10")
             .then(res => res.json())
             .then(data => setPost(data))
             .catch(() => setError("fetch failed"))
@@ -18,13 +18,13 @@ const NewReleases = () => {
         <>
             <h2 className="text-center text-4xl font-bold mb-16 mt-28">NEW RELEASED GAMES</h2>
             {
-                post ? <div className="flex flex-wrap gap-4 items-center justify-center">
+                post ? <div className="flex-container flex flex-wrap gap-4 items-center justify-center ">
                     {
                         post?.map(
                             item => <Link
                                 to={`/review/${item._id}`}
                                 key={item._id}
-                                className="focus:opacity-70 focus:animate-pulse"
+                                className="item focus:opacity-70 focus:animate-pulse"
                             >
                                 <div className="card bg-base-100 image-full max-w-80 max-h-80 shadow-xl overflow-hidden border border-base-content/10">
 

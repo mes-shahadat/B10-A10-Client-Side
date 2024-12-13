@@ -226,7 +226,7 @@ const MyReviews = () => {
                           </div>
                         </td>
                         <th className="max-sm:text-center">
-                          <NavLink to={`/update-review/${item._id}`} className={({ isPending }) => isPending ? "btn btn-ghost btn-xs !animate-pulse duration-75 !text-accent" : "btn btn-ghost btn-xs"}>Edit</NavLink>
+                          <NavLink to={`/update-review/${item._id}`} className={({ isPending }) => isPending ? "btn btn-ghost btn-xs !animate-pulse duration-75 !text-accent pointer-events-none" : "btn btn-ghost btn-xs"}>Edit</NavLink>
                           <br />
                           <DeleteBtn fn={(setLoading) => removeFromWatchlist(item._id, setLoading)} />
                         </th>

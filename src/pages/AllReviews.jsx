@@ -168,7 +168,7 @@ const AllReviews = () => {
                   paginationNumber?.map(
                     (item, idx) => <input
                       key={idx}
-                      className="join-item btn btn-square"
+                      className="join-item btn btn-square border-y border-base-300"
                       type="radio"
                       name="options"
                       aria-label={idx + 1}

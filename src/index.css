@@ -27,10 +27,26 @@
     background: oklch(var(--er));
 }
 
-/* label:has(input:checked) {
-    color: red !important
+@media screen and (hover: hover) and (min-width: calc(90.56em + 17px)) and (max-width: calc(113.44em + 17px)) {
+    .flex-container .item:nth-last-child(-n+2) {
+        display: none;
+    }
 }
 
-[type="radio"]:checked {
-    color: red !important
-} */
+@media screen and (hover: hover) and (min-width: calc(67.69em + 17px)) and (max-width: calc(90.5em + 17px)) {
+    .flex-container .item:nth-last-child(-n+1) {
+        display: none;
+    }
+}
+
+@media screen and (pointer: coarse) and (min-width: 90.56em) and (max-width: 113.44em) {
+    .flex-container .item:nth-last-child(-n+2) {
+        display: none;
+    }
+}
+
+@media screen and (pointer: coarse) and (min-width: 67.69em) and (max-width: 90.5em) {
+    .flex-container .item:nth-last-child(-n+1) {
+        display: none;
+    }
+}

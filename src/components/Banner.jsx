@@ -5,7 +5,7 @@ const Banner = ({ img, title, body }) => {
     return (
         <>
             <div className='keen-slider__slide relative'>
-                <img className='w-full h-[100vh] object-cover' src={img} alt="" loading="eager"/>
+                <img className='w-full h-[100svh] object-cover' src={img} alt="" loading="eager"/>
                 <div className='absolute top-0 w-full h-full flex items-center justify-center bg-black/30'>
                     <div className='text-white max-w-[55ch] space-y-6 text-justify p-4'>
                         <Fade cascade>

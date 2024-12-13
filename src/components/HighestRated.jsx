@@ -9,7 +9,7 @@ const HighestRated = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("https://b10-a10-server-side-nine.vercel.app/highest-rated?limit=8")
+        fetch("https://b10-a10-server-side-nine.vercel.app/highest-rated?limit=10")
             .then(res => res.json())
             .then(data => setPost(data))
             .catch(() => setError("fetch failed"))
@@ -20,10 +20,10 @@ const HighestRated = () => {
         <>
             <h2 className="text-center text-4xl font-bold mt-28 mb-16">HIGHEST RATED GAMES</h2>
             {
-                post ? <div className="flex flex-wrap gap-4 items-center justify-center">
+                post ? <div className="flex-container flex flex-wrap gap-4 items-center justify-center">
                     {
                         post?.map(
-                            item => <div key={item._id} className="card card-compact bg-base-100 max-w-80 shadow-xl border border-base-content/10">
+                            item => <div key={item._id} className="item card card-compact bg-base-100 max-w-80 shadow-xl border border-base-content/10">
                                 <figure className="max-h-80">
                                     <img
                                     className="w-full"

@@ -46,8 +46,8 @@ export const Nav = () => {
   }, [radioChecked])
 
   const navlinks = <>
-    <li><NavLink to="/" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent" : isActive ? "active" : ""}>Home</NavLink></li>
-    <li><NavLink to="/all-reviews" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent" : isActive ? "active" : ""}>All Reviews</NavLink></li>
+    <li><NavLink to="/" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent pointer-events-none" : isActive ? "active" : ""}>Home</NavLink></li>
+    <li><NavLink to="/all-reviews" className={({ isActive, isPending }) => isPending ? "!animate-pulse duration-75 !text-accent pointer-events-none" : isActive ? "active" : ""}>All Reviews</NavLink></li>
     <li><NavLink to="/add-review">Add Review</NavLink></li>
     <li><NavLink to="/my-reviews">My Reviews</NavLink></li>
     <li><NavLink to="/my-watchlist">Game Watchlist</NavLink></li>

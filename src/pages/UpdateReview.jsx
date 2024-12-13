@@ -181,14 +181,13 @@ const UpdateReview = () => {
                     <div className="label">
                       <span className="label-text">Game Genre: </span>
                     </div>
-                    <select className={genres?.[0] === "fetch failed" ? "select select-bordered bg-red-300" : "select select-bordered"} name="genre" required>
+                    <select className={genres?.[0] === "fetch failed" ? "select select-bordered bg-red-300" : "select select-bordered"} name="genre" defaultValue={data?.genre} required>
                       <option value=""></option>
                       {
                         genres?.[0] === "fetch failed" ? null : genres?.map(
                           (item, index) => <option
                             key={index}
                             value={item}
-                            selected={data?.genre === item}
                           >{item}</option>
                         )
                       }
@@ -290,7 +289,7 @@ const UpdateReview = () => {
               </fieldset>
 
 
-              <button className="card rounded-box grid place-items-center mx-auto !mt-10 max-sm:!mb-8 border border-accent p-3 bg-accent" type="submit">{btnLoading ? <Loader size="loading-xs" margin="my-0" /> : "Update Review"}</button>
+              <button className="card rounded-box grid place-items-center mx-auto !mt-10 max-sm:!mb-8 border border-accent p-3 bg-accent" type="submit" disabled={btnLoading ? true : false}>{btnLoading ? <Loader size="loading-xs" margin="my-0" /> : "Update Review"}</button>
 
             </form>
 

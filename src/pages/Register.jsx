@@ -109,7 +109,7 @@ const Register = () => {
                 }
 
                 <div className="flex w-full flex-col border-opacity-50 pt-4">
-                  <button className="card rounded-box grid place-items-center border border-accent h-12 bg-accent" type="submit">{btnLoading ? <Loader size="loading-sm" /> : "Register"}</button>
+                  <button className="card rounded-box grid place-items-center border border-accent h-12 bg-accent" type="submit" disabled={btnLoading ? true : false}>{btnLoading ? <Loader size="loading-sm" /> : "Register"}</button>
                   <div className="divider">OR</div>
                   <button className="card bg-base-100 rounded-box grid place-items-center border h-12" type="button" onClick={
                     () => loginGoogleUser().finally(() => setBtnLoading(false))
