@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.dropdown-custom-content {
+    position: fixed;
+    left: -1000px;
+    transition: left .2s ease-in-out;
+}
+
+.dropdown label:has(input:checked)+ul {
+    left: 0;
+}
+
 .dots {
     display: flex;
     padding: 10px 0;
